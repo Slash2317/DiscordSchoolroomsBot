@@ -23,6 +23,7 @@ public class Application {
 
             JDABuilder.createDefault(props.getProperty("token"))
                     .setActivity(Activity.playing("Join Schoolrooms"))
+                    .enableIntents(GatewayIntent.GUILD_MEMBERS)
                     .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                     .addEventListeners(schoolroomsBotListener)
                     .build();

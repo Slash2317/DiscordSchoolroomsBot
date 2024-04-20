@@ -5,15 +5,21 @@ import java.util.List;
 
 public enum Command {
 
-    HELP("school help", "shows list of cmds"),
-    LEVEL("school L", "links a level", 3),
-    ENTITY("school E", "links an entity", 3),
-    OBJECT("school O", "links an object", 3),
-    CANON("school C", "links a canon", 3),
-    TEMPLATE("school T", "links a template", 3),
+    LEVEL("school L", "links a level (example: school L1)", 3),
+    ENTITY("school E", "links an entity (example: school E1)", 3),
+    OBJECT("school O", "links an object (example: school O1)", 3),
+    CANON("school C", "links a canon (example: school CSectors Canon Hub)", 3),
+    TEMPLATE("school T", "links a template (example: school TBlurimage)", 3),
+    MAIN("school main", "Gets the link to the main page"),
+    USEFUL("school useful", "Gets the starter links"),
+    RANDOM("school random", "Gets a random page in the wiki"),
+    ROLE_GIVE("school rolegive", "Gives a role to a user", 0, List.of("user", "role")),
+    ROLE_REMOVE("school roleremove", "Removes a role from an user", 0, List.of("user", "role")),
     MEMBER_INFO("school member info", "provides information about a certain user", 0, List.of("user")),
+    SERVER_INFO("school server info", "provides server information"),
     STAFF("school staff", "gets the full list of current server staff"),
-    ECHO("school echo", "says the requested content", 0, List.of("message"));
+    ECHO("school echo", "says the requested content", 0, List.of("message")),
+    HELP("school help", "shows list of cmds");
 
 //    public static final EnumSet<Command> STAFF_ONLY_COMMANDS = EnumSet.of(EVENT_START, EVENT_OVER);
 

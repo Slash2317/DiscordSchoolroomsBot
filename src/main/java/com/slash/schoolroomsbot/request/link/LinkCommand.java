@@ -4,18 +4,20 @@ import com.slash.schoolroomsbot.request.Command;
 
 public enum LinkCommand {
 
-    LEVEL(Command.LEVEL, "Level"),
-    ENTITY(Command.ENTITY, "Entity"),
-    OBJECT(Command.OBJECT, "Object"),
-    CANON(Command.CANON, "Canon"),
-    TEMPLATE(Command.TEMPLATE, "Template");
+    LEVEL(Command.LEVEL, "Level_", true),
+    ENTITY(Command.ENTITY, "Entity_", true),
+    OBJECT(Command.OBJECT, "Object_", true),
+    CANON(Command.CANON, "", false),
+    TEMPLATE(Command.TEMPLATE, "Template:", false);
 
     private final Command command;
     private final String linkPrefix;
+    private final boolean usesId;
 
-    LinkCommand(Command command, String linkPrefix) {
+    LinkCommand(Command command, String linkPrefix, boolean usesId) {
         this.command = command;
         this.linkPrefix = linkPrefix;
+        this.usesId = usesId;
     }
 
     public Command getCommand() {
@@ -24,6 +26,10 @@ public enum LinkCommand {
 
     public String getLinkPrefix() {
         return linkPrefix;
+    }
+
+    public boolean isUsesId() {
+        return usesId;
     }
 
     public static LinkCommand getByCommand(Command command) {
