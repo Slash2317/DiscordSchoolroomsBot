@@ -75,10 +75,10 @@ public class InfoRequestHandler {
 
         boolean isStaff = member.getRoles().stream().anyMatch(r -> r.getName().toLowerCase().contains("staff"));
         if (isStaff) {
-            embedBuilder.setDescription(":white_check_mark:***Staff member***");
+            embedBuilder.setDescription(":white_check_mark: ***Staff member***");
         }
         else {
-            embedBuilder.setDescription(":x:***Common member***");
+            embedBuilder.setDescription(":x: ***Common member***");
         }
 
         if (member.getNickname() != null) {
