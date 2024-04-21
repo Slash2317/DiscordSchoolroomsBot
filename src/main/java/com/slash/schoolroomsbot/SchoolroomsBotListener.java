@@ -36,6 +36,7 @@ public class SchoolroomsBotListener extends ListenerAdapter {
             case LEVEL, ENTITY, OBJECT, CANON, TEMPLATE -> handleLinkCommand(requestContext);
             case RANDOM -> event.getChannel().sendMessage("https://the-schoolrooms.fandom.com/wiki/Special:Random").queue();
             case MUTE -> handleMuteCommand(requestContext);
+            case UN_MUTE -> handleUnMuteCommand(requestContext);
             case ROLE_GIVE -> handleRoleGiveCommand(requestContext);
             case ROLE_REMOVE -> handleRoleRemoveCommand(requestContext);
             case MAIN -> event.getChannel().sendMessage("""
@@ -124,10 +125,36 @@ public class SchoolroomsBotListener extends ListenerAdapter {
             });
         }
         catch (IllegalArgumentException e) {
-            requestContext.event().getChannel().sendMessage("The command must follow this format `" + requestContext.command().getCommandName() + " " + " [" + String.join("] [ ", requestContext.command().getParameters()) + "]" + "`").queue();
+            requestContext.event().getChannel().sendMessage("The command must follow this format `" + requestContext.command().getCommandName() + " [" + String.join("] [", requestContext.command().getParameters()) + "]" + "`").queue();
         }
         catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void handleUnMuteCommand(RequestContext requestContext) {
+        try {
+            if (requestContext.arguments() == null) {
+                throw new IllegalArgumentException("No arguments supplied");
+            }
+
+            String username = requestContext.arguments();
+
+            requestContext.event().getGuild().findMembers(m -> username.equals(m.getUser().getName().toLowerCase())).onSuccess(members -> {
+                if (members.isEmpty()) {
+                    return;
+                }
+
+                for (Member member : members) {
+                    requestContext.event().getGuild().removeTimeout(member).queue();
+                }
+            });
+        }
+        catch (IllegalArgumentException e) {
+            requestContext.event().getChannel().sendMessage("The command must follow this format `" + requestContext.command().getCommandName() + " [" + String.join("] [", requestContext.command().getParameters()) + "]" + "`").queue();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
