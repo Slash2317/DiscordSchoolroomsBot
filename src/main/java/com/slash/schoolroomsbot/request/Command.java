@@ -13,6 +13,7 @@ public enum Command {
     MAIN("school main", "Gets the link to the main page"),
     USEFUL("school useful", "Gets the starter links"),
     RANDOM("school random", "Gets a random page in the wiki"),
+    MUTE("school mute", "Mutes a user", 0, List.of("user", "duration")),
     ROLE_GIVE("school rolegive", "Gives a role to a user", 0, List.of("user", "role")),
     ROLE_REMOVE("school roleremove", "Removes a role from an user", 0, List.of("user", "role")),
     MEMBER_INFO("school member info", "provides information about a certain user", 0, List.of("user")),

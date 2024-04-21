@@ -10,12 +10,10 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.internal.entities.UserSnowflakeImpl;
+import java.time.temporal.ChronoUnit;
 
-import java.time.LocalDateTime;
+import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -37,6 +35,7 @@ public class SchoolroomsBotListener extends ListenerAdapter {
             case HELP -> handleHelpCommand(requestContext);
             case LEVEL, ENTITY, OBJECT, CANON, TEMPLATE -> handleLinkCommand(requestContext);
             case RANDOM -> event.getChannel().sendMessage("https://the-schoolrooms.fandom.com/wiki/Special:Random").queue();
+            case MUTE -> handleMuteCommand(requestContext);
             case ROLE_GIVE -> handleRoleGiveCommand(requestContext);
             case ROLE_REMOVE -> handleRoleRemoveCommand(requestContext);
             case MAIN -> event.getChannel().sendMessage("""
@@ -97,6 +96,39 @@ public class SchoolroomsBotListener extends ListenerAdapter {
         }
 
         requestContext.event().getChannel().sendMessage("**COMMANDS**\n\n" + String.join("\n", regularCommandDisplays)).queue();
+    }
+
+    private void handleMuteCommand(RequestContext requestContext) {
+        try {
+            if (requestContext.arguments() == null) {
+                throw new IllegalArgumentException("No arguments supplied");
+            }
+
+            int firstSpaceIndex = requestContext.arguments().indexOf(" ");
+
+            if (firstSpaceIndex == -1) {
+                throw new IllegalArgumentException("Only 1 argument supplied");
+            }
+
+            String username = requestContext.arguments().substring(0, firstSpaceIndex);
+            int duration = Integer.parseInt(requestContext.arguments().substring(firstSpaceIndex + 1).trim());
+
+            requestContext.event().getGuild().findMembers(m -> username.equals(m.getUser().getName().toLowerCase())).onSuccess(members -> {
+                if (members.isEmpty()) {
+                    return;
+                }
+
+                for (Member member : members) {
+                    requestContext.event().getGuild().timeoutFor(member, Duration.of(duration, ChronoUnit.SECONDS)).queue();
+                }
+            });
+        }
+        catch (IllegalArgumentException e) {
+            requestContext.event().getChannel().sendMessage("The command must follow this format `" + requestContext.command().getCommandName() + " " + " [" + String.join("] [ ", requestContext.command().getParameters()) + "]" + "`").queue();
+        }
+        catch (Exception e) {
+
+        }
     }
 
     private void handleRoleGiveCommand(RequestContext requestContext) {
