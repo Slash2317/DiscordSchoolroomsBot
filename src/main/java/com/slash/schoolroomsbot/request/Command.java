@@ -15,7 +15,7 @@ public enum Command {
     MAIN("school main", WIKI, "Gets the link to the main page"),
     USEFUL("school useful", WIKI, "Gets the starter links"),
     RANDOM("school random", WIKI, "Gets a random page in the wiki"),
-    MUTE("school mute", MODERATION, "Mutes a user", 0, List.of("user", "duration")),
+    MUTE("school mute", MODERATION, "Mutes a user (seconds)", 0, List.of("user", "duration")),
     UN_MUTE("school unmute", MODERATION, "Un-mutes a user", 0, List.of("user")),
     KICK("school kick", MODERATION, "Kicks a user", 0, List.of("user", "reason")),
     BAN("school ban", MODERATION, "Bans a user", 0, List.of("user", "reason")),
