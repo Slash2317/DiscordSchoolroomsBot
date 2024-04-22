@@ -5,7 +5,7 @@ public enum CommandGroup {
     LINKING(":link: **LINKING**"),
     WIKI(":school: **WIKI**"),
     MODERATION(":tools: **MODERATION & UTILITY**"),
-    SERVER(":adult: **SERVER & ACCOUNT**"),
+    SERVER(":adult: **SERVER & MEMBERS**"),
     FUN(":smile: **FUN**"),
     MISC(":question: **MISC**");
 
