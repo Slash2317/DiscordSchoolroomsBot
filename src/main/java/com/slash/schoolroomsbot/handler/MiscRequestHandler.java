@@ -16,7 +16,7 @@ public class MiscRequestHandler {
 
         StringBuilder sb = new StringBuilder();
         sb.append("""
-                **SCHOOLROOMS BOT | COMMANDS**
+                **SCHOOLROOMS | COMMANDS**
                 ------------------------------------------------""");
 
         for (CommandGroup group : CommandGroup.values()) {
