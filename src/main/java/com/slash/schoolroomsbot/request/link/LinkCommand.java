@@ -8,7 +8,10 @@ public enum LinkCommand {
     ENTITY(Command.ENTITY, "Entity_", true),
     OBJECT(Command.OBJECT, "Object_", true),
     CANON(Command.CANON, "", false),
-    TEMPLATE(Command.TEMPLATE, "Template:", false);
+    TEMPLATE(Command.TEMPLATE, "Template:", false),
+    USER(Command.USER, "User:", false),
+    PERSON_OF_INTEREST(Command.PERSON_OF_INTEREST, "", false),
+    PAGE(Command.PAGE, "", false);
 
     private final Command command;
     private final String linkPrefix;

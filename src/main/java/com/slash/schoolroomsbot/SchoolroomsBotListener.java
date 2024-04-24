@@ -34,7 +34,7 @@ public class SchoolroomsBotListener extends ListenerAdapter {
         }
 
         switch (requestContext.command()) {
-            case LEVEL, ENTITY, OBJECT, CANON, TEMPLATE -> linkRequestHandler.handleLinkCommand(requestContext);
+            case LEVEL, ENTITY, OBJECT, CANON, TEMPLATE, USER, PERSON_OF_INTEREST, PAGE -> linkRequestHandler.handleLinkCommand(requestContext);
             case MAIN -> wikiRequestHandler.handleMainCommand(requestContext);
             case USEFUL -> wikiRequestHandler.handleUsefulCommand(requestContext);
             case RANDOM -> wikiRequestHandler.handleRandomCommand(requestContext);
